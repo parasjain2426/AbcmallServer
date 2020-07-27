@@ -184,9 +184,8 @@ public class AbcmallController {
         return new abcMessage("Updated");
     }
 
-    // @PostMapping("/hello")
-    // public @ResponseBody abcMessage hello(@RequestParam(value="hey")String hey){
-    //     System.out.println(hey);
-    //     return new abcMessage("Hii I received");
-    // }
+    @GetMapping("/hello")
+    public @ResponseBody abcMessage hello(){
+        return new abcMessage("Hii I received");
+    }
 }
