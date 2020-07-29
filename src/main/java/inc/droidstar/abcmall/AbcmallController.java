@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://abcmall.herokuapp.com")
 @RequestMapping("/abcmall")
 public class AbcmallController {
     @Autowired
