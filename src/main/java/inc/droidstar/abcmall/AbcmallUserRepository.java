@@ -10,13 +10,13 @@ import inc.droidstar.abcmall.AbcmallUserdetails;
 
 public interface AbcmallUserRepository extends CrudRepository<AbcmallUserdetails,Integer>{
 
-    @Query("SELECT password FROM AbcmallUserdetails WHERE Username=BINARY(:Username)")
+    @Query("SELECT password FROM AbcmallUserdetails WHERE Username=:Username")
     String fetchUser(@Param("Username")String Username);
 
-    @Query("SELECT UserType FROM AbcmallUserdetails WHERE Username=BINARY(:Username)")
+    @Query("SELECT UserType FROM AbcmallUserdetails WHERE Username=:Username")
     String fetchUserType(@Param("Username")String Username);
 
-    @Query("SELECT FirstName,LastName,UserType,ContactNo,email,Address,BookFrom,BookTo,BusinessSpace FROM AbcmallUserdetails WHERE Username=BINARY(:Username)")
+    @Query("SELECT FirstName,LastName,UserType,ContactNo,email,Address,BookFrom,BookTo,BusinessSpace FROM AbcmallUserdetails WHERE Username=:Username")
     Iterable<AbcmallUserdetails> userDetails(@Param("Username")String Username);
 
     @Query("SELECT FirstName,LastName,ContactNo,email,Address,BookFrom,BookTo,BusinessSpace FROM AbcmallUserdetails WHERE UserType=:UserType")
@@ -27,11 +27,11 @@ public interface AbcmallUserRepository extends CrudRepository<AbcmallUserdetails
 
     @Transactional
     @Modifying
-    @Query("UPDATE AbcmallUserdetails SET password=:password WHERE Username=BINARY(:Username)")
+    @Query("UPDATE AbcmallUserdetails SET password=:password WHERE Username=:Username")
     void updatepass(@Param("Username")String Username,@Param("password")String password);
 
     @Transactional
     @Modifying
-    @Query("UPDATE AbcmallUserdetails SET BusinessSpace=:BusinessSpace,BookFrom=:BookFrom,BookTo=:BookTo WHERE Username=BINARY(:Username)")
+    @Query("UPDATE AbcmallUserdetails SET BusinessSpace=:BusinessSpace,BookFrom=:BookFrom,BookTo=:BookTo WHERE Username=:Username")
     void updatebook(@Param("Username")String Username,@Param("BusinessSpace")String BusinessSpace,@Param("BookFrom")String BookFrom,@Param("BookTo")String BookTo);
 }
