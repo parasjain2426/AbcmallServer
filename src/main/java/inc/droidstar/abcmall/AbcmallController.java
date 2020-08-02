@@ -45,7 +45,6 @@ public class AbcmallController {
         abcUserDetails.setUsername(Username);
         abcUserDetails.setPassword(password);
         abcUser.save(abcUserDetails);
-        abcShop.updateSpace("0", BusinessSpace);
         return new abcMessage("Saved Successfully");
     }
 
@@ -101,15 +100,19 @@ public class AbcmallController {
         return abcShop.findAll();
     }
 
-    @GetMapping("/nonAvail")
-    public @ResponseBody abcMessage nonAvail(@RequestParam(value = "BusinessSpace")String BusinessSpace){
-        String LastDate = abcUser.nextAvail(BusinessSpace);
-        if(LastDate==null){
-            return new abcMessage("No");
+    @GetMapping("/nextAvail")
+    public @ResponseBody abcMessage nextAvail(@RequestParam(value="BusinessSpace")String BusinessSpace){
+        if(abcUser.nextAvail(BusinessSpace)!=null){
+            return new abcMessage(abcUser.nextAvail(BusinessSpace));
         }
         else{
-        return new abcMessage(LastDate);
+            return new abcMessage("No");
         }
+    }
+
+    @GetMapping("/chckavail")
+    public @ResponseBody Iterable<AbcmallUserdetails> chckavail(@RequestParam(value = "DF")String DF,@RequestParam(value = "DT")String DT,@RequestParam(value="BusinessSpace")String BusinessSpace){
+        return abcUser.chckAvail(DF,DT,BusinessSpace);
     }
 
     @PostMapping("/addRevenue")

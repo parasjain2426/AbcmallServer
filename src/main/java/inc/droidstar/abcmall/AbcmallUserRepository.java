@@ -22,8 +22,11 @@ public interface AbcmallUserRepository extends CrudRepository<AbcmallUserdetails
     @Query("SELECT FirstName,LastName,ContactNo,email,Address,BookFrom,BookTo,BusinessSpace FROM AbcmallUserdetails WHERE UserType=:UserType")
     Iterable<AbcmallUserdetails> allUserDetails(@Param("UserType")String UserType);
 
-    @Query("SELECT BookTo FROM AbcmallUserdetails WHERE BusinessSpace=:BusinessSpace")
+    @Query("SELECT MAX(BookTo) FROM AbcmallUserdetails WHERE BusinessSpace=:BusinessSpace")
     String nextAvail(@Param("BusinessSpace")String BusinessSpace);
+
+    @Query("SELECT BookFrom,BookTo,BusinessSpace FROM AbcmallUserdetails WHERE (BusinessSpace=:BusinessSpace) AND ((BookFrom<=:DF AND BookTo>=:DT) OR (BookFrom>=:DF AND BookFrom<=:DT) OR (BookFrom>=:DF AND BookTo<=:DT) OR (BookTo>=:DF AND BookTo<=:DT))")
+    Iterable<AbcmallUserdetails> chckAvail(@Param("DF")String DF,@Param("DT")String DT,@Param("BusinessSpace")String BusinessSpace);
 
     @Transactional
     @Modifying
