@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@CrossOrigin(origins = "https://abcmall.herokuapp.com")
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/abcmall")
 public class AbcmallController {
     @Autowired
@@ -187,8 +187,8 @@ public class AbcmallController {
         return new abcMessage("Updated");
     }
 
-    @GetMapping("/hello")
-    public @ResponseBody abcMessage hello(){
+    @PostMapping("/hello")
+    public @ResponseBody abcMessage hello(@RequestParam(value="hell")String hell){
         return new abcMessage("Hii I received");
     }
 }
