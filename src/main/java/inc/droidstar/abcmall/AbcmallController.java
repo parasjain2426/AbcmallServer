@@ -126,8 +126,13 @@ public class AbcmallController {
     }
 
     @GetMapping("/getRevenue")
-    public @ResponseBody Iterable<AbcRevenue> getRevenue(){
-        return Reprevenue.findAll();
+    public @ResponseBody Iterable<AbcRevenue> getRevenue(@RequestParam(value = "Bfrom")String Bfrom,@RequestParam(value = "Bto")String Bto){
+        return Reprevenue.getRev(Bfrom, Bto);
+    }
+
+    @GetMapping("/totRevenue")
+    public @ResponseBody Integer totRevenue(@RequestParam(value = "Bfrom")String Bfrom,@RequestParam(value = "Bto")String Bto){
+        return Reprevenue.totRev(Bfrom, Bto);
     }
 
     @PostMapping("/addReq")
